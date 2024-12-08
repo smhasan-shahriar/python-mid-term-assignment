@@ -21,33 +21,50 @@ class Book:
     def view_book_info(self):
         print("Library Books:")
         for book in Library.book_list:
-            print(f'ID: {book.__book_id}, Title: {book.__title}, Author: {book.__author}, Availability: {book.__availability}')
+            status = "Available"
+            if book.__availability == False:
+                status = "Not Available"
+            else:
+                status = "Available"
+            print(f'ID: {book.__book_id}, Title: {book.__title}, Author: {book.__author}, Availability: {status}')
     @classmethod
     def borrow_book(self, id):
         flag = 0
+        signal = 0
         for book in Library.book_list:
-            if book.__book_id == id and book.__availability == True:
-                book.__availability = False
-                flag = 1
-                break
-                
-     
-        if flag == 1:
-            return f"Book '{book.__title}' borrowed successfully"
+            if book.__book_id == id:
+                signal = 1
+                if book.__availability == True:
+                    book.__availability = False
+                    flag = 1
+                    break
+        if signal == 1:
+            if flag == 1:
+                return f"Book '{book.__title}' borrowed successfully"
+            else:
+                return f"Book '{book.__title}' is already borrowed"
         else:
-            return f"Book '{book.__title}' not available"
+            return f"Invalid Book ID"
     
     @classmethod
     def return_book(self, id):
         flag = 0
+        signal = 0
         for book in Library.book_list:
-            if book.__book_id == id and book.__availability == False:
-                book.__availability = True  
-                flag = 1
-        if flag == 1:
-            return f"Book '{book.__title}' returned successfully"
+            if book.__book_id == id:
+                signal = 1
+                if book.__availability == False:
+                    book.__availability = True
+                    flag = 1
+                    break
+        if signal == 1:
+            if flag == 1:
+                return f"Book '{book.__title}' returned successfully"
+            else:
+                return f"Book '{book.__title}' is not borrowed. Check your Book ID"
         else:
-            return f'Wrong book ID'
+            return f"Invalid Book ID"
+       
 
 book1 = Book("Basic Physics", "Alex Computon", True)
 book2 = Book("Basic Data Structure", "John Doe", True)
@@ -59,10 +76,6 @@ book7 = Book("Principle of Chemistry", "Ava Trainwell", True)
 book8 = Book("Magical World", "Harry Potter", True)
 book9 = Book("Database Management", "Adam Smith", True)
 
-# Book.view_book_info()
-# print(Book.borrow_book(105))
-# Book.view_book_info()
-# print(Book.return_book(102))
 
 while True:
     print("--------Welcome to the Library----------")
