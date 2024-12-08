@@ -11,40 +11,41 @@ class Library:
 class Book:
     def __init__(self, title, author, availability):
         id = len(Library.book_list) + 101
-        self.book_id = id
-        self.title = title
-        self.author = author
-        self.availability = availability
+        self.__book_id = id
+        self.__title = title
+        self.__author = author
+        self.__availability = availability
         Library.entry_book(self)
     
     @classmethod
     def view_book_info(self):
+        print("Library Books:")
         for book in Library.book_list:
-            print(f'ID: {book.book_id}, Title: {book.title}, Author: {book.author}, Availability: {book.availability}')
+            print(f'ID: {book.__book_id}, Title: {book.__title}, Author: {book.__author}, Availability: {book.__availability}')
     @classmethod
     def borrow_book(self, id):
         flag = 0
         for book in Library.book_list:
-            if book.book_id == id and book.availability == True:
-                book.availability = False
+            if book.__book_id == id and book.__availability == True:
+                book.__availability = False
                 flag = 1
                 break
                 
      
         if flag == 1:
-            return f'Book {book.title} has been successfully issued'
+            return f"Book '{book.__title}' borrowed successfully"
         else:
-            return f'Book {book.title} not available'
+            return f"Book '{book.__title}' not available"
     
     @classmethod
     def return_book(self, id):
         flag = 0
         for book in Library.book_list:
-            if book.book_id == id and book.availability == False:
-                book.availability = True  
+            if book.__book_id == id and book.__availability == False:
+                book.__availability = True  
                 flag = 1
         if flag == 1:
-            return f'Book {book.title} returned successfully'
+            return f"Book '{book.__title}' returned successfully"
         else:
             return f'Wrong book ID'
 
@@ -73,6 +74,16 @@ while True:
     user_input = int(input())
     if user_input == 1:
         Book.view_book_info()
+    elif user_input == 2:
+        print("Enter Book ID to borrow: ", end="")
+        entry = int(input())
+        result = Book.borrow_book(entry)
+        print(result)
+    elif user_input == 3:
+        print("Enter Book ID to return: ", end="")
+        entry = int(input())
+        result = Book.return_book(entry)
+        print(result)
     elif user_input == 4:
         break
     else:
