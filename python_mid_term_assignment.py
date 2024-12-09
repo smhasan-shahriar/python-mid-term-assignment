@@ -4,7 +4,7 @@ class Library:
         pass
 
     @classmethod
-    def entry_book(self, newBook):
+    def entry_book(cls, newBook):
         Library.book_list.append(newBook)
 
 
@@ -18,7 +18,7 @@ class Book:
         Library.entry_book(self)
     
     @classmethod
-    def view_book_info(self):
+    def view_book_info(cls):
         print("Library Books:")
         for book in Library.book_list:
             status = "Available"
@@ -28,7 +28,7 @@ class Book:
                 status = "Available"
             print(f'ID: {book.__book_id}, Title: {book.__title}, Author: {book.__author}, Availability: {status}')
     @classmethod
-    def borrow_book(self, id):
+    def borrow_book(cls, id):
         flag = 0
         signal = 0
         for book in Library.book_list:
@@ -40,14 +40,14 @@ class Book:
                     break
         if signal == 1:
             if flag == 1:
-                return f"Book '{book.__title}' borrowed successfully"
+                return f"Book '{book.__title}' borrowed successfully."
             else:
-                return f"Book '{book.__title}' is already borrowed"
+                return f"Book '{book.__title}' is already borrowed."
         else:
             return f"Invalid Book ID"
     
     @classmethod
-    def return_book(self, id):
+    def return_book(cls, id):
         flag = 0
         signal = 0
         for book in Library.book_list:
@@ -59,9 +59,9 @@ class Book:
                     break
         if signal == 1:
             if flag == 1:
-                return f"Book '{book.__title}' returned successfully"
+                return f"Book '{book.__title}' returned successfully."
             else:
-                return f"Book '{book.__title}' is not borrowed. Check your Book ID"
+                return f"Book '{book.__title}' is not borrowed. Please check the Book ID."
         else:
             return f"Invalid Book ID"
        
@@ -78,9 +78,9 @@ book9 = Book("Database Management", "Adam Smith", True)
 
 
 while True:
-    print("--------Welcome to the Library----------")
+    print("----------Welcome to the Library----------")
     print("1. View All Books")
-    print("2. Borrow Books")
+    print("2. Borrow Book")
     print("3. Return Book")
     print("4. Exit")
     print("Enter your choice: ", end="")
@@ -100,7 +100,7 @@ while True:
     elif user_input == 4:
         break
     else:
-        print("wrong user input")
+        print("Wrong user input. Please give the correct input.")
 
 
 
