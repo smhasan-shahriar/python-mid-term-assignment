@@ -75,7 +75,7 @@ book6 = Book("Internet of Things", "Oliver Twist", True)
 book7 = Book("Principle of Chemistry", "Ava Trainwell", True)
 book8 = Book("Magical World", "Harry Potter", True)
 book9 = Book("Database Management", "Adam Smith", True)
-book9 = Book("Integral Calculus", "John Smith", True)
+book10 = Book("Integral Calculus", "John Smith", True)
 
 
 while True:
